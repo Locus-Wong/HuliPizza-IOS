@@ -1,0 +1,56 @@
+//
+//  MenuItemView.swift
+//  HuliPizza
+//
+//  Created by Locus Wong on 2025-07-30.
+//
+
+import SwiftUI
+
+struct MenuItemView: View {
+    var body: some View {
+        VStack {
+            HStack{
+                Text("Margherita Huli Pizza")
+                    .font(.title)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(.black)
+                    .padding(.leading)
+                    
+                if let image = UIImage(named : "0_lg"){
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                        .padding([.top,.bottom], 5)
+                    //                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .cornerRadius(10)
+                        
+                } else {
+                    Image("surfboard_lg")
+                        .resizable()
+                        .scaledToFit()
+                }
+            }.background(
+                .linearGradient(
+                    colors: [Color("Surf"),
+                             Color("Sky").opacity(0.1)],
+                    startPoint: .leading,
+                    endPoint: .trailing), in:Capsule()
+            ).shadow(color:.teal, radius:5, x:8, y: 8)
+            
+            VStack(alignment: .leading) {
+                
+                
+                ScrollView {
+                    Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at massa et enim volutpat commodo. Sed mattis risus ante, eu suscipit elit auctor ut. Nullam tristique sagittis turpis et dignissim. Proin ullamcorper lacus sit amet nulla porttitor tempus. Donec sed nibh sed dui venenatis gravida. Vestibulum ut ultrices augue. Nunc.")
+                        .font(.custom("Georgia", size: 18 , relativeTo: .body))
+                }
+            }
+            
+        }
+    }
+}
+
+#Preview {
+    MenuItemView()
+}
