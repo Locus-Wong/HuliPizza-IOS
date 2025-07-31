@@ -14,21 +14,22 @@ struct MenuItemView: View {
                 Text("Margherita Huli Pizza")
                     .font(.title)
                     .fontWeight(.semibold)
-                    .foregroundStyle(.black)
+                    .foregroundStyle(.ultraThickMaterial)
                     .padding(.leading)
                     
-                if let image = UIImage(named : "0_lg"){
+                if let image = UIImage(named : "0x_lg"){
                     Image(uiImage: image)
                         .resizable()
                         .scaledToFit()
                         .padding([.top,.bottom], 5)
                     //                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                        .cornerRadius(10)
+                        .cornerRadius(15)
                         
                 } else {
                     Image("surfboard_lg")
                         .resizable()
                         .scaledToFit()
+                        .rotationEffect(.degrees(180))
                 }
             }.background(
                 .linearGradient(
