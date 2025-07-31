@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct MenuView: View {
+    var menu: [MenuItem]
     var body: some View {
         ScrollView{
-            ForEach(1...30, id: \.self){ item in
+            ForEach(menu){ item in
                 MenuRowView(item: item)
             }
         }
@@ -18,5 +19,5 @@ struct MenuView: View {
 }
 
 #Preview {
-    MenuView()
+    MenuView(menu: MenuModel().menu)
 }
