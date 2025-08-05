@@ -18,6 +18,13 @@ struct MenuGridView: View {
                 LazyVGrid(columns: columnLayout) {
                     ForEach(menu){ item in
                         MenuItemTileView(menuItem: item)
+                        // Order of gesture is matter and important, be careful!
+                            .onTapGesture {
+                                selectedItem = item
+                            }
+                            .onLongPressGesture {
+                                selectedItem = noMenuItem
+                            }
                     }
                 }
             }
