@@ -8,11 +8,27 @@
 import SwiftUI
 
 struct StatusBarView: View {
+    @EnvironmentObject var orders: OrderModel
+    @Binding var showOrders: Bool
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            Text("\(orders.orderItems.count) orders")
+            Spacer()
+            Button{
+                showOrders.toggle()
+            } label: {
+                Image(systemName: showOrders ? "cart" : "menucard")
+                
+            }
+            Spacer()
+            Text(orders.orderTotal, format: .currency(code: "USD"))
+            
+            
+        }.foregroundStyle(.white)
+            .font(.title2)
     }
 }
 
 #Preview {
-    StatusBarView()
+    StatusBarView(showOrders: .constant(false)).environmentObject(OrderModel())
 }
