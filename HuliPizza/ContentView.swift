@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     var menu: [MenuItem]
     @StateObject var orders: OrderModel = OrderModel()
-    @State private var showOrders: Bool = true
+    @State private var showOrders: Bool = false
     @State private var selectedItem : MenuItem = noMenuItem
     var body: some View {
         VStack {
@@ -48,7 +48,7 @@ struct ContentView: View {
                 startPoint: .topLeading,
                 endPoint: .bottom
             )
-        )
+        ).environmentObject(orders)
     }
 }
 
