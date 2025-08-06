@@ -10,15 +10,25 @@ import SwiftUI
 struct MenuGridView: View {
     var menu:[MenuItem]
     @State var selectedItem: MenuItem = noMenuItem
+    @State private var favorites = Favorites().favorites
     let columnLayout = Array(repeating: GridItem(spacing: 10), count: 2)
     var body: some View {
         VStack{
+            FavoritesGridView(favorites: $favorites, selected: $selectedItem)
+                .background(.regularMaterial)
             Text(selectedItem.name)
             ScrollView {
                 LazyVGrid(columns: columnLayout) {
-                    ForEach(menu){ item in
+                    ForEach(
+                        Favorites.excluded(from: menu, by: favorites)
+                    ){ item in
                         MenuItemTileView(menuItem: item)
                         // Order of gesture is matter and important, be careful!
+                            .onTapGesture(count: 2) {
+                                if !favorites.contains(where: {$0.id == item.id}){
+                                    favorites.append(item)
+                                }
+                            }
                             .onTapGesture {
                                 selectedItem = item
                             }

@@ -8,27 +8,21 @@
 import SwiftUI
 
 struct FavoritesGridView: View {
-    @State var menu:[MenuItem]
-    @State var selectedItem: MenuItem = noMenuItem
-    @State var favourites:[MenuItem] = Favorites().favorites
+    @Binding var favorites: [MenuItem]
+    @Binding var selected: MenuItem
     let columnLayout = Array(repeating: GridItem(), count: 5)
+   
     var body: some View {
         LazyVGrid(columns: columnLayout) {
-            ForEach(menu){ item in
+            ForEach(favorites.sorted{ $0.id < $1.id }){ item in
                 FavoriteCellView(menuItem: item)
-                    .onTapGesture(count: 1, perform: {
-                        // add for purchase
-                        
-                    })
-                    .onTapGesture(count: 2) {
-                        // add to favourite
-                        selectedItem = item
-                        favourites.append(selectedItem)
+                    .onTapGesture {
+                        selected = item
                     }
                     .onLongPressGesture {
-                        // remove from favorite
-                        selectedItem = item
-                        favourites.filter({$0.})
+                        if let index = favorites.firstIndex(where: {$0.id == item.id}){
+                            favorites.remove(at: index)
+                        }
                     }
             }
         }
@@ -36,5 +30,8 @@ struct FavoritesGridView: View {
 }
 
 #Preview {
-    FavoritesGridView(menu: MenuModel().menu)
+    FavoritesGridView(
+        favorites: .constant([noMenuItem, testMenuItem]),
+        selected: .constant(noMenuItem)
+    )
 }
