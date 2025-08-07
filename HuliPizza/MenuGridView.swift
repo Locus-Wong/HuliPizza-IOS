@@ -14,8 +14,20 @@ struct MenuGridView: View {
     let columnLayout = Array(repeating: GridItem(spacing: 10), count: 2)
     var body: some View {
         VStack{
-            Text("Favorites")
-                .opacity(favorites.isEmpty ? 0 : 1)
+            HStack {
+                Text("Favorites")
+                Spacer()
+                Image(systemName: "heart.fill")
+                    .padding()
+                    .phaseAnimator([false, true]) { content, value in
+                        content
+                            .foregroundStyle(value ? .red : .yellow)
+                            .scaleEffect(value ? 2.0 : 1.0)
+                    } animation: { _ in
+                            .easeInOut(duration: 1.5)
+                    }
+            }
+            .opacity(favorites.isEmpty ? 0 : 1)
             FavoritesGridView(favorites: $favorites, selected: $selectedItem)
                 .background(.regularMaterial)
             // Implicit: Only animates the specific view, and you can animate different properties independently
