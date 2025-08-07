@@ -8,10 +8,29 @@
 import SwiftUI
 
 struct MenuGridView: View {
+    @Namespace private var nspace
     var menu:[MenuItem]
     @Binding var selectedItem: MenuItem
     @State private var favorites = Favorites().favorites
     let columnLayout = Array(repeating: GridItem(spacing: 10), count: 2)
+    let columnLayout4 = Array(repeating: GridItem(spacing: 10), count: 4)
+    var favoriteGridView : some View {
+        LazyVGrid(columns: columnLayout4) {
+            ForEach(favorites.sorted{ $0.id < $1.id }){ item in
+                FavoriteCellView(menuItem: item)
+                    .matchedGeometryEffect(id: item.id, in: nspace)
+                    .onTapGesture {
+                        selectedItem = item
+                    }
+                    .onLongPressGesture {
+                        if let index = favorites.firstIndex(where: {$0.id == item.id}){
+                            favorites.remove(at: index)
+                        }
+                    }
+            }
+        }
+    }
+    
     var body: some View {
         VStack{
             HStack {
@@ -30,7 +49,8 @@ struct MenuGridView: View {
 //                    }
             }
             .opacity(favorites.isEmpty ? 0 : 1)
-            FavoritesGridView(favorites: $favorites, selected: $selectedItem)
+            // FavoritesGridView(favorites: $favorites, selected: $selectedItem)
+            favoriteGridView
                 .background(.regularMaterial)
             // Implicit: Only animates the specific view, and you can animate different properties independently
             // Always specify the value parameter with .animation to avoid performance issues
@@ -45,6 +65,7 @@ struct MenuGridView: View {
                     ){ item in
                         MenuItemTileView(menuItem: item)
                         // Order of gesture is matter and important, be careful!
+                            .matchedGeometryEffect(id: item.id, in: nspace)
                             .onTapGesture(count: 2) {
                                 if !favorites.contains(where: {$0.id == item.id}){
                 // Explicit: withAnimation doesn't animate "all views" - it only animates views that depend on the state variables you change inside the closure.
