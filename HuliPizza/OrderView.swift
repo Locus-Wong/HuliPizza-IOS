@@ -42,6 +42,13 @@ struct OrderView: View {
                             .shadow(radius: 10)
                             .padding(.bottom, 5)
                             .padding([.leading, .trailing], 7)
+                            //.animation(Spring(.bouncy, duration: 2), value: orders)
+                            .onLongPressGesture {
+                                orders.removeOrder(id: order.id)
+                            }
+                            .animation(.bouncy(
+                                duration: 2
+                            ), value: orders.orderItems.count)
                     }
                 }
                 .padding(.top, 70)
@@ -54,13 +61,13 @@ struct OrderView: View {
                     .background(.ultraThinMaterial)
             }
             .padding()
-            Button("Delete Order"){
-                if !orders.orderItems.isEmpty{
-                    orders.removeLast()
-                }
-            }.padding(5)
-                .background(.regularMaterial, in : Capsule())
-                .padding(7)
+//            Button("Delete Order"){
+//                if !orders.orderItems.isEmpty{
+//                    orders.removeLast()
+//                }
+//            }.padding(5)
+//                .background(.regularMaterial, in : Capsule())
+//                .padding(7)
             
         }.background(orderBackground)
     }
