@@ -7,6 +7,19 @@
 
 import SwiftUI
 
+let orderBackground = LinearGradient(
+    stops: gradientStops,
+    startPoint: .bottomLeading,
+    endPoint: .topTrailing
+)
+
+let cellBackground = RadialGradient(
+    colors: [sky, .red,. yellow, .green, .blue, .purple, sky],
+    center: .bottomTrailing,
+    startRadius: 90,
+    endRadius: 140
+)
+
 struct OrderView: View {
     @ObservedObject var orders: OrderModel
     var body: some View {
@@ -18,8 +31,12 @@ struct OrderView: View {
                         //Text(order.item.name)
                         OrderRowView(order: order)
                             .padding(4)
+//                            .background(
+//                                .regularMaterial,
+//                                in: RoundedRectangle(cornerRadius: 10)
+//                            )
                             .background(
-                                .regularMaterial,
+                                cellBackground,
                                 in: RoundedRectangle(cornerRadius: 10)
                             )
                             .shadow(radius: 10)
@@ -45,7 +62,7 @@ struct OrderView: View {
                 .background(.regularMaterial, in : Capsule())
                 .padding(7)
             
-        }.background(Color("Surf"))
+        }.background(orderBackground)
     }
 }
 
