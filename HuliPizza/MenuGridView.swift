@@ -20,7 +20,7 @@ struct MenuGridView: View {
                 .background(.regularMaterial)
             // Implicit: Only animates the specific view, and you can animate different properties independently
             // Always specify the value parameter with .animation to avoid performance issues
-                .animation(.default, value: favorites)
+                .animation(.easeIn(duration: 1.5), value: favorites)
             //Text(selectedItem.name)
             Text("Menu")
                 .opacity(favorites.isEmpty ? 0 : 1)
@@ -48,6 +48,7 @@ struct MenuGridView: View {
                     }
                 }
             }
+            .animation(.spring(duration: 1.5, bounce: 0.2), value: favorites)
         }
     }
 }
