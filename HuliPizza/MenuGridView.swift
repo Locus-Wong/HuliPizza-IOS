@@ -23,9 +23,11 @@ struct MenuGridView: View {
                         content
                             .foregroundStyle(value ? .red : .yellow)
                             .scaleEffect(value ? 2.0 : 1.0)
-                    } animation: { _ in
-                            .easeInOut(duration: 1.5)
+                            .animation(.easeInOut(duration: 1.5), value: value)
                     }
+//                    animation: { _ in
+//                            .easeInOut(duration: 1.5)
+//                    }
             }
             .opacity(favorites.isEmpty ? 0 : 1)
             FavoritesGridView(favorites: $favorites, selected: $selectedItem)
