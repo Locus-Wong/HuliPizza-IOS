@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+let sky = Color("Sky")
+let surf = Color("Surf")
+
 struct ContentView: View {
     var menu: [MenuItem]
     @StateObject var orders: OrderModel = OrderModel()
@@ -47,7 +50,7 @@ struct ContentView: View {
             )
         ).environmentObject(orders)
             .onAppear{
-                presentGrid = true
+                presentGrid = false
             }
     }
 }

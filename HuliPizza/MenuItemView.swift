@@ -6,6 +6,12 @@
 //
 
 import SwiftUI
+let radialGradient = RadialGradient(
+    colors: [surf, sky],
+    center: .bottom,
+    startRadius: 75,
+    endRadius: 300
+)
 
 struct MenuItemView: View {
     @State private var addedItem : Bool = false
@@ -67,6 +73,14 @@ struct MenuItemView: View {
           
             
         }
+//        .background (
+//            .angularGradient(
+//                colors: [sky, surf, sky],
+//                center: .leading,
+//                startAngle: Angle(degrees: 0),
+//                endAngle: Angle(degrees: 270))
+//        )
+        .background(radialGradient)
     }
 }
 
