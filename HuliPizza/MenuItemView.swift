@@ -12,6 +12,18 @@ let radialGradient = RadialGradient(
     startRadius: 75,
     endRadius: 300
 )
+let gradientStops: [Gradient.Stop] = [
+    Gradient.Stop(color: surf, location: 0.0),
+    Gradient.Stop(color: sky, location: 0.33),
+    Gradient.Stop(color: surf, location: 0.95),
+    Gradient.Stop(color: sky, location: 1.0),
+]
+
+let linearStopGradient = LinearGradient(
+    stops: gradientStops,
+    startPoint: .top,
+    endPoint: .bottom
+)
 
 struct MenuItemView: View {
     @State private var addedItem : Bool = false
@@ -68,6 +80,7 @@ struct MenuItemView: View {
             .disabled(item.id < 0)
             .padding()
             .background(.red, in: Capsule())
+            //.background(linearStopGradient, in: Capsule())
             .foregroundStyle(.white)
             .padding(5)
           
