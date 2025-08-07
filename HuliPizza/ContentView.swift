@@ -47,7 +47,7 @@ struct ContentView: View {
             )
         ).environmentObject(orders)
             .onAppear{
-                presentGrid = Bool.random()
+                presentGrid = true
             }
     }
 }
