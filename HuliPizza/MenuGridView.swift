@@ -9,14 +9,14 @@ import SwiftUI
 
 struct MenuGridView: View {
     var menu:[MenuItem]
-    @State var selectedItem: MenuItem = noMenuItem
+    @Binding var selectedItem: MenuItem
     @State private var favorites = Favorites().favorites
     let columnLayout = Array(repeating: GridItem(spacing: 10), count: 2)
     var body: some View {
         VStack{
             FavoritesGridView(favorites: $favorites, selected: $selectedItem)
                 .background(.regularMaterial)
-            Text(selectedItem.name)
+            //Text(selectedItem.name)
             ScrollView {
                 LazyVGrid(columns: columnLayout) {
                     ForEach(
@@ -43,5 +43,5 @@ struct MenuGridView: View {
 }
 
 #Preview {
-    MenuGridView(menu: MenuModel().menu)
+    MenuGridView(menu: MenuModel().menu, selectedItem: .constant(noMenuItem))
 }

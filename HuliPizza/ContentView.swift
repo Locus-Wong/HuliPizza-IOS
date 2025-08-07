@@ -12,13 +12,14 @@ struct ContentView: View {
     @StateObject var orders: OrderModel = OrderModel()
     @State private var showOrders: Bool = false
     @State private var selectedItem : MenuItem = noMenuItem
+    @State private var presentGrid: Bool = false
     var body: some View {
         VStack {
             HeaderView()
                 .shadow(radius: 5)
                 .environment(\.colorScheme, .light) // override the environment to light mode for this view
           
-            StatusBarView(showOrders: $showOrders)
+            StatusBarView(presentGrid: $presentGrid, showOrders: $showOrders)
             if showOrders{
                 OrderView(orders: orders)
                     .cornerRadius(10)
@@ -28,7 +29,11 @@ struct ContentView: View {
                     .background(.thinMaterial,
                         in: RoundedRectangle(cornerRadius: 10)
                     )
-                MenuView(menu: menu, selectedItem: $selectedItem)
+                if presentGrid {
+                    MenuGridView(menu: menu, selectedItem: $selectedItem)
+                } else{
+                    MenuView(menu: menu, selectedItem: $selectedItem)
+                } 
             }
             Spacer()
             
@@ -41,6 +46,9 @@ struct ContentView: View {
                 endPoint: .bottom
             )
         ).environmentObject(orders)
+            .onAppear{
+                presentGrid = Bool.random()
+            }
     }
 }
 
