@@ -27,7 +27,7 @@ struct SFSymbolPlayView: View {
             .padding([.leading,.trailing])
             .background(.thickMaterial,in:Capsule())
 //Rainbow
-            Image(systemName: "rainbow")
+            Image(systemName: "rainbow", variableValue: scale) // variableValue to change opacity based on the scale
                 .resizable()
                 .scaledToFit()
                 .symbolRenderingMode(.multicolor) // change the rainbow to have multi colors
@@ -55,7 +55,7 @@ struct SFSymbolPlayView: View {
             Spacer()
 // 3 Person
             HStack{
-                Image(systemName: "person" + (isCircle ? ".2":".3"))
+                Image(systemName: "person" + (isCircle ? ".2":".3"), variableValue: scale) // Not a variable color symbol, so variableValue: scale doesn't work here
                     .resizable()
                     .scaledToFit()
                     .symbolVariant(isFilled ? .fill : .none)
@@ -63,7 +63,7 @@ struct SFSymbolPlayView: View {
                     .foregroundStyle(.indigo)
                 Spacer()
 //  3 person sequential
-                Image(systemName: "person.3.sequence")
+                Image(systemName: "person.3.sequence", variableValue: scale) // variableValue to change opacity based on the scale
                     .resizable()
                     .scaledToFit()
                     .symbolVariant(.fill)
