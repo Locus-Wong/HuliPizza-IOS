@@ -50,6 +50,7 @@ struct SFSymbolPlayView: View {
                     .scaledToFit()
                     .symbolRenderingMode(.multicolor) // change the badge color, but the folder remains
                     .foregroundStyle(.secondary) // change the folder color, but the badge remains
+                    .symbolEffect(.rotate, value: isSlash)
             }
             .frame(height:100)
             Spacer()
@@ -85,7 +86,7 @@ struct SFSymbolPlayView: View {
                     } label:{
 // Fill
                         Image(systemName: "circle" + (isFilled ? ".fill" : ""))
-                           
+                            .symbolEffect(.bounce, value: isFilled)
                     }
                     Spacer()
                     Button{
@@ -93,6 +94,7 @@ struct SFSymbolPlayView: View {
                     } label:{
 // Circle
                         Image(systemName: "circle" + (isCircle ? "" : ".dotted"))
+                            .symbolEffect(.bounce, value: isCircle)
                     }
                     Spacer()
                     Button{
@@ -100,6 +102,7 @@ struct SFSymbolPlayView: View {
                     } label:{
 // Slash
                         Image(systemName: "slash.circle" + (isSlash ? ".fill" : ""))
+                            .symbolEffect(.rotate, value: isSlash)
                     }
                     Spacer()
                     Button{
@@ -107,6 +110,10 @@ struct SFSymbolPlayView: View {
                     } label:{
 // Animating
                         Image(systemName: "play.rectangle" + (isAnimating ? ".fill" : ""))
+                            .symbolEffect(
+                                .breathe,
+                                value: isAnimating
+                            ) // discrete value is required for .scale
                     }
                     
                 }
