@@ -30,6 +30,7 @@ struct SFSymbolPlayView: View {
             Image(systemName: "rainbow")
                 .resizable()
                 .scaledToFit()
+                .symbolRenderingMode(.multicolor) // change the rainbow to have multi colors
             HStack{
 // Pencil
                 Image(systemName: "pencil")
@@ -38,11 +39,15 @@ struct SFSymbolPlayView: View {
                     .symbolVariant(isSlash ? .slash : .none)
                     .symbolVariant(isCircle ? .circle : .none)
                     .symbolVariant(isFilled ? .fill : .none)
+                    .symbolRenderingMode(.monochrome)
+                    .foregroundStyle(.yellow) // use with .symbolRenderingMode(.monochrome) to change the color to yellow
                 Spacer()
 // Folder with badge
                 Image(systemName: isAnimating ? "folder.badge.plus" :"folder.badge.minus" )
                     .resizable()
                     .scaledToFit()
+                    .symbolRenderingMode(.multicolor) // change the badge color, but the folder remains
+                    .foregroundStyle(.secondary) // change the folder color, but the badge remains
             }
             .frame(height:100)
             Spacer()
