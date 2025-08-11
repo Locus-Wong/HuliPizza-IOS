@@ -26,25 +26,29 @@ struct SFSymbolPlayView: View {
             }
             .padding([.leading,.trailing])
             .background(.thickMaterial,in:Capsule())
-//Rainbow
+            //Rainbow
             Image(systemName: "rainbow", variableValue: scale) // variableValue to change opacity based on the scale
                 .resizable()
                 .scaledToFit()
                 .symbolRenderingMode(.multicolor) // change the rainbow to have multi colors
+                .symbolEffect(
+                    .variableColor.iterative,
+                    isActive: isAnimating
+                ) // one color band at a time, not cumulative
             HStack{
-// Pencil
+                // Pencil
                 Image(systemName: "pencil")
                     .resizable()
                     .scaledToFit()
                     .symbolVariant(isSlash ? .slash : .none)
                     .symbolVariant(isCircle ? .circle : .none)
                     .symbolVariant(isFilled ? .fill : .none)
-//                    .symbolRenderingMode(.monochrome)
-//                    .foregroundStyle(.yellow) // use with .symbolRenderingMode(.monochrome) to change the color to yellow
+                //                    .symbolRenderingMode(.monochrome)
+                //                    .foregroundStyle(.yellow) // use with .symbolRenderingMode(.monochrome) to change the color to yellow
                     .symbolRenderingMode(.hierarchical)
                     .foregroundStyle(.primary) // the slash is primary layer, and the pencil is secondary
                 Spacer()
-// Folder with badge
+                // Folder with badge
                 Image(systemName: isAnimating ? "folder.badge.plus" :"folder.badge.minus" )
                     .resizable()
                     .scaledToFit()
@@ -54,7 +58,7 @@ struct SFSymbolPlayView: View {
             }
             .frame(height:100)
             Spacer()
-// 3 Person
+            // 3 Person
             HStack{
                 Image(systemName: "person" + (isCircle ? ".2":".3"), variableValue: scale) // Not a variable color symbol, so variableValue: scale doesn't work here
                     .resizable()
@@ -62,14 +66,16 @@ struct SFSymbolPlayView: View {
                     .symbolVariant(isFilled ? .fill : .none)
                     .symbolRenderingMode(.hierarchical) // use opacity to change colors
                     .foregroundStyle(.indigo)
+                    .symbolEffect(.breathe, isActive: isAnimating) // using layers in animation
                 Spacer()
-//  3 person sequential
+                //  3 person sequential
                 Image(systemName: "person.3.sequence", variableValue: scale) // variableValue to change opacity based on the scale
                     .resizable()
                     .scaledToFit()
                     .symbolVariant(.fill)
                     .symbolRenderingMode(.palette) // now can use multi colors for foregroundStyle
                     .foregroundStyle(.green, .indigo, .orange)
+                    .symbolEffect(.variableColor, isActive: isAnimating) // three people are moving as individual layers (default option: cumulative)
             }
             .frame(height:100)
             Spacer()
@@ -84,7 +90,7 @@ struct SFSymbolPlayView: View {
                     Button{
                         isFilled.toggle()
                     } label:{
-// Fill
+                        // Fill
                         Image(systemName: "circle" + (isFilled ? ".fill" : ""))
                             .symbolEffect(.bounce, value: isFilled)
                     }
@@ -92,7 +98,7 @@ struct SFSymbolPlayView: View {
                     Button{
                         isCircle.toggle()
                     } label:{
-// Circle
+                        // Circle
                         Image(systemName: "circle" + (isCircle ? "" : ".dotted"))
                             .symbolEffect(.bounce, value: isCircle)
                     }
@@ -100,7 +106,7 @@ struct SFSymbolPlayView: View {
                     Button{
                         isSlash.toggle()
                     } label:{
-// Slash
+                        // Slash
                         Image(systemName: "slash.circle" + (isSlash ? ".fill" : ""))
                             .symbolEffect(.rotate, value: isSlash)
                     }
@@ -108,11 +114,12 @@ struct SFSymbolPlayView: View {
                     Button{
                         isAnimating.toggle()
                     } label:{
-// Animating
+                        // Animating
                         Image(systemName: "play.rectangle" + (isAnimating ? ".fill" : ""))
                             .symbolEffect(
                                 .breathe,
-                                value: isAnimating
+                                //value: isAnimating
+                                isActive: isAnimating // breathing back and forth as long as it is true
                             ) // discrete value is required for .scale
                     }
                     
@@ -125,6 +132,9 @@ struct SFSymbolPlayView: View {
             .background(.regularMaterial)
             Spacer()
         }
+        .onChange(of: scale){ // fix the bug that the slider doesn't work if constantly animating
+        isAnimating = false
+    }
         .padding()
         
     }
