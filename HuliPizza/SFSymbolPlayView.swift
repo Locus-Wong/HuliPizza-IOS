@@ -39,8 +39,10 @@ struct SFSymbolPlayView: View {
                     .symbolVariant(isSlash ? .slash : .none)
                     .symbolVariant(isCircle ? .circle : .none)
                     .symbolVariant(isFilled ? .fill : .none)
-                    .symbolRenderingMode(.monochrome)
-                    .foregroundStyle(.yellow) // use with .symbolRenderingMode(.monochrome) to change the color to yellow
+//                    .symbolRenderingMode(.monochrome)
+//                    .foregroundStyle(.yellow) // use with .symbolRenderingMode(.monochrome) to change the color to yellow
+                    .symbolRenderingMode(.hierarchical)
+                    .foregroundStyle(.primary) // the slash is primary layer, and the pencil is secondary
                 Spacer()
 // Folder with badge
                 Image(systemName: isAnimating ? "folder.badge.plus" :"folder.badge.minus" )
@@ -57,12 +59,16 @@ struct SFSymbolPlayView: View {
                     .resizable()
                     .scaledToFit()
                     .symbolVariant(isFilled ? .fill : .none)
+                    .symbolRenderingMode(.hierarchical) // use opacity to change colors
+                    .foregroundStyle(.indigo)
                 Spacer()
 //  3 person sequential
                 Image(systemName: "person.3.sequence")
                     .resizable()
                     .scaledToFit()
                     .symbolVariant(.fill)
+                    .symbolRenderingMode(.palette) // now can use multi colors for foregroundStyle
+                    .foregroundStyle(.green, .indigo, .orange)
             }
             .frame(height:100)
             Spacer()
