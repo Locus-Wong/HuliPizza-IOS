@@ -47,6 +47,7 @@ struct SFSymbolPlayView: View {
                 //                    .foregroundStyle(.yellow) // use with .symbolRenderingMode(.monochrome) to change the color to yellow
                     .symbolRenderingMode(.hierarchical)
                     .foregroundStyle(.primary) // the slash is primary layer, and the pencil is secondary
+                    .contentTransition(.symbolEffect(.replace))
                 Spacer()
                 // Folder with badge
                 Image(systemName: isAnimating ? "folder.badge.plus" :"folder.badge.minus" )
@@ -54,7 +55,8 @@ struct SFSymbolPlayView: View {
                     .scaledToFit()
                     .symbolRenderingMode(.multicolor) // change the badge color, but the folder remains
                     .foregroundStyle(.secondary) // change the folder color, but the badge remains
-                    .symbolEffect(.rotate, value: isSlash)
+                    //.symbolEffect(.rotate, value: isSlash)
+                    .contentTransition(.symbolEffect(.replace))
             }
             .frame(height:100)
             Spacer()
@@ -67,6 +69,7 @@ struct SFSymbolPlayView: View {
                     .symbolRenderingMode(.hierarchical) // use opacity to change colors
                     .foregroundStyle(.indigo)
                     .symbolEffect(.breathe, isActive: isAnimating) // using layers in animation
+                    .contentTransition(.symbolEffect(.replace))
                 Spacer()
                 //  3 person sequential
                 Image(systemName: "person.3.sequence", variableValue: scale) // variableValue to change opacity based on the scale
@@ -109,6 +112,8 @@ struct SFSymbolPlayView: View {
                         // Slash
                         Image(systemName: "slash.circle" + (isSlash ? ".fill" : ""))
                             .symbolEffect(.rotate, value: isSlash)
+                            //.symbolEffect(.disappear, isActive: isCircle)
+                            .symbolEffect(.scale.down, isActive: isCircle)
                     }
                     Spacer()
                     Button{
