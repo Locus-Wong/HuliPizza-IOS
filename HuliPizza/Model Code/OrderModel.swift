@@ -52,7 +52,12 @@ class OrderModel : ObservableObject{
         newOrder.id = lastID
         orderItems.append(newOrder)
     }
-    
+    /// Update an order
+    func updateOrder(orderItem: OrderItem){
+        if let index = orderItems.firstIndex(where: { $0.id == orderItem.id}){
+            orderItems[index] = orderItem
+        }
+    }
     /// Removes an Order
     func removeOrder(id:Int){
         if let index = orderItems.firstIndex(where: {$0.id == id}){
