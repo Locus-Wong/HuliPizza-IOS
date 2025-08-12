@@ -27,6 +27,7 @@ let linearStopGradient = LinearGradient(
 
 struct MenuItemView: View {
     @State private var addedItem : Bool = false
+    @State private var presentView: Bool = false
     @Binding var item : MenuItem
     @ObservedObject var orders : OrderModel
     var body: some View {
@@ -69,13 +70,19 @@ struct MenuItemView: View {
                
             }
             Button{
-                addedItem.toggle()
-                orders.addOrder(item, quantity: 1)
+                presentView = true
             } label: {
                 Spacer()
                 Text(item.price, format: .currency(code: "USD")).bold()
                 Image(systemName: addedItem ? "cart.badge.plus.fill" : "cart.badge.plus")
                 Spacer()
+            }
+            .alert("Buy a \(item.name)?", isPresented: $presentView){
+                Button("Cancel", role: .cancel){}
+                Button("Oh, Yes!") {
+                    addedItem = true
+                    orders.addOrder(item, quantity: 1)
+                }
             }
             .disabled(item.id < 0)
             .padding()
