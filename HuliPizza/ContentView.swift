@@ -40,7 +40,9 @@ struct ContentView: View {
                     OrderView(orders: orders)
                         .cornerRadius(10)
                 }
+                .badge(orders.orderCount) // add the badge to the SF symbol
             }
+            //.tabViewStyle(.page) // can slide left/right to switch tab with little icon on the bottom
             Spacer()
         }
         .padding()
