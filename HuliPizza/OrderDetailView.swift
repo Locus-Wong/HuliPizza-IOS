@@ -144,7 +144,11 @@ struct OrderDetailView: View {
                 
                 //Order Button-------------------------
                 Button(newOrder ? "Order" : "Change"){
-                    
+                    updateOrder()
+                    if newOrder {
+                        orders.addOrder(orderItem: orderItem)
+                    }
+                    presentSheet = false
                 }
                 .padding()
                 .padding([.leading,.trailing])
@@ -155,7 +159,7 @@ struct OrderDetailView: View {
                 .shadow(radius:7,x:2,y:2)
                 //Cancel Button-------------------------
                 Button("Cancel"){
-                    
+                    presentSheet = false
                 }
                 .padding()
                 .padding([.leading,.trailing])

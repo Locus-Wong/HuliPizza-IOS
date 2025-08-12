@@ -28,6 +28,7 @@ let linearStopGradient = LinearGradient(
 struct MenuItemView: View {
     @State private var addedItem : Bool = false
     @State private var presentView: Bool = false
+    @State private var orderItem: OrderItem = noOrderItem
     @Binding var item : MenuItem
     @ObservedObject var orders : OrderModel
     var body: some View {
@@ -44,7 +45,7 @@ struct MenuItemView: View {
                         .resizable()
                         .scaledToFit()
                         .padding([.top,.bottom], 5)
-                    //                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    //  .clipShape(RoundedRectangle(cornerRadius: 10))
                         .cornerRadius(15)
                     
                 } else {
@@ -67,9 +68,10 @@ struct MenuItemView: View {
                     Text(item.description)
                         .font(.custom("Georgia", size: 18 , relativeTo: .body))
                 }
-               
+                
             }
             Button{
+                orderItem.item = item // pass the item which is our pizza into the order itself
                 presentView = true
             } label: {
                 Spacer()
@@ -77,29 +79,37 @@ struct MenuItemView: View {
                 Image(systemName: addedItem ? "cart.badge.plus.fill" : "cart.badge.plus")
                 Spacer()
             }
-            .alert("Buy a \(item.name)?", isPresented: $presentView){
-                Button("Cancel", role: .cancel){}
-                Button("Oh, Yes!") {
-                    addedItem = true
-                    orders.addOrder(item, quantity: 1)
-                }
-            }
+//            .alert("Buy a \(item.name)?", isPresented: $presentView){
+//                Button("Cancel", role: .cancel){}
+//                Button("Oh, Yes!") {
+//                    addedItem = true
+//                    orders.addOrder(item, quantity: 1)
+//                }
+//            }
+            .sheet(
+                isPresented: $presentView,
+                content: {
+                    OrderDetailView(
+                        orderItem: $orderItem,
+                        presentSheet: $presentView
+                    )
+                })
             .disabled(item.id < 0)
             .padding()
             .background(.red, in: Capsule())
             //.background(linearStopGradient, in: Capsule())
             .foregroundStyle(.white)
             .padding(5)
-          
+            
             
         }
-//        .background (
-//            .angularGradient(
-//                colors: [sky, surf, sky],
-//                center: .leading,
-//                startAngle: Angle(degrees: 0),
-//                endAngle: Angle(degrees: 270))
-//        )
+        //        .background (
+        //            .angularGradient(
+        //                colors: [sky, surf, sky],
+        //                center: .leading,
+        //                startAngle: Angle(degrees: 0),
+        //                endAngle: Angle(degrees: 270))
+        //        )
         .background(radialGradient)
     }
 }
