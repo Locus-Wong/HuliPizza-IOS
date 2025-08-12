@@ -12,6 +12,9 @@ import SwiftUI
 
 struct OrderDetailView: View {
     @Binding var orderItem:OrderItem
+    // SwiftUI actually creates two things:
+    // A computed property called orderItem that you use in your code
+    // An underlying storage property called _orderItem (with an underscore prefix) that holds the actual Binding<OrderItem> struct, which contains: A getter function - to read the current value A setter function - to write/update the value A reference to the source - where the actual data lives
     @Binding var presentSheet:Bool
     //
     var newOrder:Bool
@@ -37,13 +40,15 @@ struct OrderDetailView: View {
     
     /// Initializer to correctly assign wrapped values of binding variables using the `.wrapped` property of a binding variable. We do this to have new instances of the order values, which have the `@State` variables above.
     init(orderItem:Binding<OrderItem>,presentSheet:Binding<Bool>,newOrder:Bool = true){
-        self._orderItem = orderItem
+        self._orderItem = orderItem // stores that binding
+        // self.orderItem = orderItem  // This would be wrong!
+        // self.orderItem expects an OrderItem value (the wrapped value)
         self._presentSheet = presentSheet
         self.newOrder = newOrder
         
         
     }
-
+    
     
     /// A function that assigns the `@State` variables to the corresponding values of the `orderItem`
     func updateOrder(){
@@ -56,7 +61,7 @@ struct OrderDetailView: View {
     
     var body: some View {
         VStack{
-// Image and name banner-------------------
+            // Image and name banner-------------------
             HStack {
                 if let image = UIImage(named: "\(orderItem.item.id)_lg"){
                     Image(uiImage: image)
@@ -78,7 +83,7 @@ struct OrderDetailView: View {
                     .padding(.trailing)
             }
             .background(.linearGradient(colors: [Color("Surf"),Color("Sky")], startPoint: .leading, endPoint: .trailing), in:Capsule())
-// Quantitty, crust and price label--------
+            // Quantitty, crust and price label--------
             HStack{
                 Text(quantity,format:.number)
                 Text(pizzaCrust.rawValue + " Crust")
@@ -97,9 +102,9 @@ struct OrderDetailView: View {
             TextField("Customer Name", text: $name)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
-// Pizza Attributes-------------------
+            // Pizza Attributes-------------------
             VStack{
-// Crust picker-------------------
+                // Crust picker-------------------
                 Picker(selection: $pizzaCrust) {
                     ForEach(PizzaCrust.allCases,id:\.self){crust in
                         Text(crust.rawValue).tag(crust)
@@ -113,12 +118,12 @@ struct OrderDetailView: View {
                 .foregroundColor(.black)
                 .background(.ultraThickMaterial)
                 
-// Double the toppings?-------------------
+                // Double the toppings?-------------------
                 Toggle(isOn: $doubleIngredient){
                     Text((doubleIngredient ? "Double Toppings" : "Single Toppings"))
                 }
                 
-//How many pizzas? -------------------
+                //How many pizzas? -------------------
                 Stepper(value: $quantity, in: 1...10 ){
                     Text("\(quantity) " + (quantity == 1 ? "pizza" : "pizzas"))
                 }
@@ -127,19 +132,19 @@ struct OrderDetailView: View {
             .background(.regularMaterial)
             .cornerRadius(3)
             
-//Comments and requests about the order-------------------
+            //Comments and requests about the order-------------------
             Text("Comments and Requests").font(.headline).foregroundColor(.primary)
             TextEditor(text:$comments)
                 .frame(maxHeight:200)
                 .clipShape(RoundedRectangle(cornerRadius: 3))
                 .shadow(radius: 1)
             Spacer()
-//Order and Cancel buttons-------------------
+            //Order and Cancel buttons-------------------
             HStack {
-            
-//Order Button-------------------------
+                
+                //Order Button-------------------------
                 Button(newOrder ? "Order" : "Change"){
-                   
+                    
                 }
                 .padding()
                 .padding([.leading,.trailing])
@@ -148,9 +153,9 @@ struct OrderDetailView: View {
                 .font(.title)
                 .padding(.trailing,20)
                 .shadow(radius:7,x:2,y:2)
-//Cancel Button-------------------------
+                //Cancel Button-------------------------
                 Button("Cancel"){
-                   
+                    
                 }
                 .padding()
                 .padding([.leading,.trailing])
@@ -162,12 +167,12 @@ struct OrderDetailView: View {
         }
         .padding()
         .background(LinearGradient(stops: [
-                Gradient.Stop(color: surf, location: 0),
-                Gradient.Stop(color: surf, location: 0.25),
-                Gradient.Stop(color: sky, location: 0.6)
+            Gradient.Stop(color: surf, location: 0),
+            Gradient.Stop(color: surf, location: 0.25),
+            Gradient.Stop(color: sky, location: 0.6)
         ],
-        startPoint: .top,
-        endPoint: .bottom))
+                                   startPoint: .top,
+                                   endPoint: .bottom))
         .onAppear{
             self.pizzaCrust = orderItem.item.crust
             self.quantity = Int(orderItem.quantity)
