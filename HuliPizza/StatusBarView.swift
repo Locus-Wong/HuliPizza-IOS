@@ -85,12 +85,12 @@ struct StatusBarView: View {
             //                .onTapGesture {
             //                    presentGrid.toggle()
             //                }
-            Button{
-                showOrders.toggle()
-            } label: {
-                Image(systemName: showOrders ? "cart" : "menucard")
-                    .contentTransition(.symbolEffect(.replace))
-                            }
+//            Button{
+//                showOrders.toggle()
+//            } label: {
+//                Image(systemName: showOrders ? "cart" : "menucard")
+//                    .contentTransition(.symbolEffect(.replace))
+//                }
                 //            .phaseAnimator(
                 //                GridToggleAnimation.allCases,
                 //                trigger: showOrders

@@ -21,25 +21,27 @@ struct ContentView: View {
             HeaderView()
                 .shadow(radius: 5)
                 .environment(\.colorScheme, .light) // override the environment to light mode for this view
-          
+            
             StatusBarView(presentGrid: $presentGrid, showOrders: $showOrders)
-            if showOrders{
-                OrderView(orders: orders)
-                    .cornerRadius(10)
-            } else {
-                MenuItemView(item: $selectedItem, orders: orders)
-                    .padding(5)
-                    .background(.thinMaterial,
-                        in: RoundedRectangle(cornerRadius: 10)
-                    )
-                if presentGrid {
-                    MenuGridView(menu: menu, selectedItem: $selectedItem)
-                } else{
-                    MenuView(menu: menu, selectedItem: $selectedItem)
-                } 
+            TabView {
+                Tab("Menu", systemImage: "menucard"){
+                    MenuItemView(item: $selectedItem, orders: orders)
+                        .padding(5)
+                        .background(.thinMaterial,
+                                    in: RoundedRectangle(cornerRadius: 10)
+                        )
+                    if presentGrid {
+                        MenuGridView(menu: menu, selectedItem: $selectedItem)
+                    } else{
+                        MenuView(menu: menu, selectedItem: $selectedItem)
+                    }
+                }
+                Tab("Orders", systemImage: "cart"){
+                    OrderView(orders: orders)
+                        .cornerRadius(10)
+                }
             }
             Spacer()
-            
         }
         .padding()
         .background(
