@@ -45,6 +45,7 @@ struct MenuView: View {
             .navigationDestination(for: MenuItem.self) { selected in
                 MenuItemView(item: .constant(selected), orders: orders, path: $path)
             }
+            .appBackground
     }
 }
 
@@ -54,5 +55,5 @@ struct MenuView: View {
         selectedItem: .constant(testMenuItem),
         path: .constant(NavigationPath())
     )
-        .environmentObject(OrderModel())
+    .environmentObject(OrderModel())
 }

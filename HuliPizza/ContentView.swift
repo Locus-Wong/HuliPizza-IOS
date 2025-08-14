@@ -46,13 +46,15 @@ struct ContentView: View {
             Spacer()
         }
         .padding()
-        .background(
-            .linearGradient(
-                colors: [.cyan, .surf, .sky, .white],
-                startPoint: .topLeading,
-                endPoint: .bottom
-            )
-        ).environmentObject(orders)
+//        .background(
+//            .linearGradient(
+//                colors: [.cyan, .surf, .sky, .white],
+//                startPoint: .topLeading,
+//                endPoint: .bottom
+//            )
+//        )
+        .appBackground
+        .environmentObject(orders)
             .onAppear{
                 presentGrid = false
             }

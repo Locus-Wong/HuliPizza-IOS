@@ -60,7 +60,7 @@ struct MenuItemView: View {
                             .rotationEffect(.degrees(180))
                     }
                 }
-               
+                
             }.background(
                 .linearGradient(
                     colors: [.surf,
@@ -131,9 +131,9 @@ struct MenuItemView: View {
                     Image(systemName: "chevron.backward")
                 }
                 .padding()
-                    .background(.red, in: Capsule())
-                    .foregroundStyle(.white)
-                    .padding(5)
+                .background(.red, in: Capsule())
+                .foregroundStyle(.white)
+                .padding(5)
                 
                 Button{
                     path = NavigationPath()
@@ -155,7 +155,8 @@ struct MenuItemView: View {
         //        )
         .navigationBarBackButtonHidden() // hide the back button
         .toolbarVisibility(.hidden, for: .tabBar) // hide the tab toolbar on the bottom
-        .background(radialGradient)
+        //        .background(radialGradient)
+        .appBackground
     }
 }
 

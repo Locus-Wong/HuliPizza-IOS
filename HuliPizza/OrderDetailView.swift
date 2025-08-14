@@ -172,13 +172,12 @@ struct OrderDetailView: View {
             }
         }
         .padding()
-        .background(LinearGradient(stops: [
-            Gradient.Stop(color: surf, location: 0),
-            Gradient.Stop(color: surf, location: 0.25),
-            Gradient.Stop(color: sky, location: 0.6)
-        ],
-                                   startPoint: .top,
-                                   endPoint: .bottom))
+        //        .background(LinearGradient(stops: [
+        //            Gradient.Stop(color: surf, location: 0),
+        //            Gradient.Stop(color: surf, location: 0.25),
+        //            Gradient.Stop(color: sky, location: 0.6)
+        //        ],startPoint: .top,endPoint: .bottom))
+        .appBackground
         .onAppear{
             self.pizzaCrust = orderItem.item.crust
             self.quantity = Int(orderItem.quantity)
@@ -187,28 +186,28 @@ struct OrderDetailView: View {
             self.comments = orderItem.comments
         }
         .navigationBarBackButtonHidden()
-//        .navigationTitle(orderItem.item.name)
-//        .navigationBarTitleDisplayMode(.large)
-//        .toolbar{
-//            ToolbarItemGroup(placement: .navigation){
-//                HStack{
-//                    Button(newOrder ? "Order" : "Change"){
-//                        updateOrder()
-//                        if newOrder {
-//                            orders.addOrder(orderItem: orderItem)
-//                        } else {
-//                            orders.updateOrder(orderItem: orderItem)
-//                        }
-//                        presentSheet = false
-//                    }
-//                    
-//                    Button("Cancel"){
-//                        presentSheet = false
-//                    }
-//                }
-//                .background(sky)
-//            }
-//        }
+        //        .navigationTitle(orderItem.item.name)
+        //        .navigationBarTitleDisplayMode(.large)
+        //        .toolbar{
+        //            ToolbarItemGroup(placement: .navigation){
+        //                HStack{
+        //                    Button(newOrder ? "Order" : "Change"){
+        //                        updateOrder()
+        //                        if newOrder {
+        //                            orders.addOrder(orderItem: orderItem)
+        //                        } else {
+        //                            orders.updateOrder(orderItem: orderItem)
+        //                        }
+        //                        presentSheet = false
+        //                    }
+        //
+        //                    Button("Cancel"){
+        //                        presentSheet = false
+        //                    }
+        //                }
+        //                .background(sky)
+        //            }
+        //        }
         
     }
     

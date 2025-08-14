@@ -28,3 +28,22 @@ extension ShapeStyle where Self == Color{
         Color(red: 0.357, green: 0.637, blue: 0.239)
     }    
 }
+
+struct AppBackground: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .background(
+                LinearGradient(
+                    colors: [.sky, .white],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+            )
+    }
+}
+
+extension View {
+    var appBackground: some View {
+        self.modifier(AppBackground())
+    }
+}
