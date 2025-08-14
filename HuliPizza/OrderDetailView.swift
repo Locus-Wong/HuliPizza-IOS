@@ -186,8 +186,29 @@ struct OrderDetailView: View {
             self.name = orderItem.name
             self.comments = orderItem.comments
         }
-        .navigationTitle(orderItem.item.name)
-        .navigationBarTitleDisplayMode(.large)
+        .navigationBarBackButtonHidden()
+//        .navigationTitle(orderItem.item.name)
+//        .navigationBarTitleDisplayMode(.large)
+//        .toolbar{
+//            ToolbarItemGroup(placement: .navigation){
+//                HStack{
+//                    Button(newOrder ? "Order" : "Change"){
+//                        updateOrder()
+//                        if newOrder {
+//                            orders.addOrder(orderItem: orderItem)
+//                        } else {
+//                            orders.updateOrder(orderItem: orderItem)
+//                        }
+//                        presentSheet = false
+//                    }
+//                    
+//                    Button("Cancel"){
+//                        presentSheet = false
+//                    }
+//                }
+//                .background(sky)
+//            }
+//        }
         
     }
     
