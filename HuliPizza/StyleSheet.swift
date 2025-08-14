@@ -26,7 +26,7 @@ extension ShapeStyle where Self == Color{
     
     static var palm: Color{
         Color(red: 0.357, green: 0.637, blue: 0.239)
-    }    
+    }
 }
 
 struct AppBackground: ViewModifier {
@@ -52,6 +52,27 @@ struct StatusBarStyle: ViewModifier {
     }
 }
 
+struct AppButtonStyleModifier: ViewModifier {
+    var backgroundColor: Color
+    
+    var foregroundColor: Color {
+        switch backgroundColor{
+        case .sky, .white, .clear: return .deep
+        default: return .sky
+        }
+    }
+    
+    func body(content: Content) -> some View {
+        content
+            .font(.title).bold()
+            .padding([.leading, .trailing], 15)
+            .padding([.top, .bottom], 5)
+            .background(backgroundColor)
+            .foregroundStyle(foregroundColor)
+            .clipShape(RoundedRectangle(cornerRadius: 15))
+    }
+}
+
 extension View {
     var appBackground: some View {
         self.modifier(AppBackground())
@@ -59,5 +80,9 @@ extension View {
     
     var statusBarStyle: some View {
         self.modifier(StatusBarStyle())
+    }
+    
+    func appButtonStyleModifier(backgroundColor: Color) -> some View {
+        self.modifier(AppButtonStyleModifier(backgroundColor: backgroundColor))
     }
 }

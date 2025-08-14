@@ -117,11 +117,12 @@ struct MenuItemView: View {
                     )
                 }
                 .disabled(item.id < 0)
-                .padding()
-                .background(.red, in: Capsule())
-                //.background(linearStopGradient, in: Capsule())
-                .foregroundStyle(.white)
-                .padding(5)
+                .appButtonStyleModifier(backgroundColor: .palm)
+//                .padding()
+//                .background(.red, in: Capsule())
+//                //.background(linearStopGradient, in: Capsule())
+//                .foregroundStyle(.white)
+//                .padding(5)
                 
                 Button{
                     if !path.isEmpty {
@@ -130,20 +131,22 @@ struct MenuItemView: View {
                 } label: {
                     Image(systemName: "chevron.backward")
                 }
-                .padding()
-                .background(.red, in: Capsule())
-                .foregroundStyle(.white)
-                .padding(5)
+                .appButtonStyleModifier(backgroundColor: .sky)
+//                .padding()
+//                .background(.red, in: Capsule())
+//                .foregroundStyle(.white)
+//                .padding(5)
                 
                 Button{
                     path = NavigationPath()
                 } label: {
                     Image(systemName: "chevron.backward.2")
                 }
-                .padding()
-                .background(.red, in: Capsule())
-                .foregroundStyle(.white)
-                .padding(5)
+                .appButtonStyleModifier(backgroundColor: .sky)
+//                .padding()
+//                .background(.red, in: Capsule())
+//                .foregroundStyle(.white)
+//                .padding(5)
             }
         }
         //        .background (

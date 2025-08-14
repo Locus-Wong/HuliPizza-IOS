@@ -152,23 +152,25 @@ struct OrderDetailView: View {
                     }
                     presentSheet = false
                 }
-                .padding()
-                .padding([.leading,.trailing])
-                .foregroundColor(.white)
-                .background(.green,in: Capsule())
-                .font(.title)
-                .padding(.trailing,20)
-                .shadow(radius:7,x:2,y:2)
+                .appButtonStyleModifier(backgroundColor: .palm)
+//                .padding()
+//                .padding([.leading,.trailing])
+//                .foregroundColor(.white)
+//                .background(.green,in: Capsule())
+//                .font(.title)
+//                .padding(.trailing,20)
+//                .shadow(radius:7,x:2,y:2)
                 //Cancel Button-------------------------
                 Button("Cancel"){
                     presentSheet = false
                 }
-                .padding()
-                .padding([.leading,.trailing])
-                .foregroundColor(.white)
-                .background(.red,in: Capsule())
-                .font(.title)
-                .shadow(radius:7,x:2,y:2)
+                .appButtonStyleModifier(backgroundColor: .sunset)
+//                .padding()
+//                .padding([.leading,.trailing])
+//                .foregroundColor(.white)
+//                .background(.red,in: Capsule())
+//                .font(.title)
+//                .shadow(radius:7,x:2,y:2)
             }
         }
         .padding()
