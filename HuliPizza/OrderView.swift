@@ -27,7 +27,7 @@ struct OrderView: View {
     var body: some View {
         VStack {
             ZStack(alignment: .top){
-                ScrollView{
+                List{
                     ForEach($orders.orderItems){ order in // $orders.orderItems: [Binding<OrderItem>]
                         //Text(order.item.name)
                         OrderRowView(order: order) // order: Binding<OrderItem>
@@ -38,9 +38,9 @@ struct OrderView: View {
                             .padding(.bottom, 5)
                             .padding([.leading,.trailing],7)
                         //.animation(Spring(.bouncy, duration: 2), value: orders)
-                            .onLongPressGesture{
-                                orders.removeOrder(id: order.id)
-                            }
+//                            .onLongPressGesture{
+//                                orders.removeOrder(id: order.id)
+//                            }
                             .animation(.bouncy(duration:2), value: orders.orderItems.count)
                             .onTapGesture{
                                 selected = order.wrappedValue // wrappedValue extracts the actual value from inside the binding wrapper. (need a copy of the value to work with)
@@ -53,6 +53,9 @@ struct OrderView: View {
 //                            } content:{
 //                                OrderDetailView(orderItem: $selected, presentSheet: $presentView, newOrder: false)
 //                            }
+                    }
+                    .onDelete { offset in
+                        orders.orderItems.remove(atOffsets: offset)
                     }
                 }
                 // no closure for completion handler, have to find anther way to update the order in OrderDetailView
