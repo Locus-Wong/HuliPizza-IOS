@@ -27,7 +27,7 @@ struct MenuItemTileView: View {
             Text(menuItem.name).font(.caption2)
                 .padding(3)
         }
-        .background(Color("Sky").opacity(0.5))
+        .background(.sky.opacity(0.5))
         .background(.regularMaterial)
         .cornerRadius(10)
         .shadow(radius: 3,x: 2,y: 2)

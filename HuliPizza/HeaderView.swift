@@ -20,7 +20,7 @@ struct HeaderView: View {
                     //                .scaledToFill()
                     Text("Huli Pizza Company")
                         .font(.custom("Georgia", size: 30, relativeTo: .title))
-                    //                .foregroundColor(Color("Sky"))
+                    //                .foregroundColor(.sky)
                         .foregroundStyle(.regularMaterial)
                         .fontWeight(.semibold)
                     
@@ -32,7 +32,7 @@ struct HeaderView: View {
                         .scaledToFit()
                     Text("Huli Pizza Company")
                         .font(.custom("Georgia", size: 30, relativeTo: .title))
-                        .foregroundColor(Color("Surf"))
+                        .foregroundColor(.surf)
                         .fontWeight(.heavy)
                 }
             }

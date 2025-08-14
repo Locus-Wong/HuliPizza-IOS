@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-let sky = Color("Sky")
-let surf = Color("Surf")
+let sky = Color.sky
+let surf = Color.surf
 
 struct ContentView: View {
     var menu: [MenuItem]
@@ -48,7 +48,7 @@ struct ContentView: View {
         .padding()
         .background(
             .linearGradient(
-                colors: [.cyan, Color("Surf"), Color("Sky"), .white],
+                colors: [.cyan, .surf, .sky, .white],
                 startPoint: .topLeading,
                 endPoint: .bottom
             )
