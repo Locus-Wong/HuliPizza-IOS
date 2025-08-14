@@ -29,6 +29,7 @@ struct MenuItemView: View {
     @State private var addedItem : Bool = false
     @State private var presentView: Bool = false
     @State private var orderItem: OrderItem = noOrderItem
+    @State private var suggestedItem: MenuItem = MenuModel().menu.randomElement() ?? noMenuItem
     @Binding var item : MenuItem
     @ObservedObject var orders : OrderModel
     var body: some View {
@@ -74,6 +75,20 @@ struct MenuItemView: View {
                         .font(.custom("Georgia", size: 18 , relativeTo: .body))
                 }
                 
+            }
+            NavigationLink(value: suggestedItem){
+                VStack{
+                    Text("You Might Also Like")
+                        .textCase(.uppercase)
+                        .font(.caption)
+                    MenuRowView(item: suggestedItem)
+                        .foregroundStyle(.primary)
+                }
+                .padding()
+                .background(.regularMaterial)
+            }
+            .navigationDestination(for: MenuItem.self) { _ in
+                MenuItemView(item: $suggestedItem, orders: orders)
             }
             Button{
                 orderItem.item = item // pass the item which is our pizza into the order itself
