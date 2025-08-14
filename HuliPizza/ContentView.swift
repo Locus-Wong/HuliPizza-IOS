@@ -24,6 +24,7 @@ struct ContentView: View {
                 .environment(\.colorScheme, .light) // override the environment to light mode for this view
             
             StatusBarView(presentGrid: $presentGrid, showOrders: $showOrders)
+                .statusBarStyle
             TabView {
                 Tab("Menu", systemImage: "menucard"){
                     NavigationStack(path: $path){

@@ -42,8 +42,22 @@ struct AppBackground: ViewModifier {
     }
 }
 
+struct StatusBarStyle: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .foregroundStyle(.sky)
+            .font(.title2)
+            .padding(3)
+            .background(.deep, in:RoundedRectangle(cornerRadius: 3))
+    }
+}
+
 extension View {
     var appBackground: some View {
         self.modifier(AppBackground())
+    }
+    
+    var statusBarStyle: some View {
+        self.modifier(StatusBarStyle())
     }
 }
