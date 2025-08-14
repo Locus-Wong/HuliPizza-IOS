@@ -91,38 +91,60 @@ struct MenuItemView: View {
             .navigationDestination(for: MenuItem.self) { _ in
                 MenuItemView(item: $suggestedItem, orders: orders, path: $path)
             }
-            Button{
-                orderItem.item = item // pass the item which is our pizza into the order itself
-                presentView = true
-            } label: {
-                Spacer()
-                Text(item.price, format: .currency(code: "USD")).bold()
-                Image(systemName: addedItem ? "cart.badge.plus.fill" : "cart.badge.plus")
-                Spacer()
-            }
-//            .alert("Buy a \(item.name)?", isPresented: $presentView){
-//                Button("Cancel", role: .cancel){}
-//                Button("Oh, Yes!") {
-//                    addedItem = true
-//                    orders.addOrder(item, quantity: 1)
-//                }
-//            }
-            .sheet(
-                isPresented: $presentView,
-                content: {
+            HStack{
+                Button{
+                    orderItem.item = item // pass the item which is our pizza into the order itself
+                    presentView = true
+                } label: {
+                    Spacer()
+                    Text(item.price, format: .currency(code: "USD")).bold()
+                    Image(systemName: addedItem ? "cart.badge.plus.fill" : "cart.badge.plus")
+                    Spacer()
+                }
+                //            .alert("Buy a \(item.name)?", isPresented: $presentView){
+                //                Button("Cancel", role: .cancel){}
+                //                Button("Oh, Yes!") {
+                //                    addedItem = true
+                //                    orders.addOrder(item, quantity: 1)
+                //                }
+                //            }
+                .sheet(isPresented: $presentView){
+                    path = NavigationPath() // completion handler
+                } content: {
                     OrderDetailView(
                         orderItem: $orderItem,
                         presentSheet: $presentView
                     )
-                })
-            .disabled(item.id < 0)
-            .padding()
-            .background(.red, in: Capsule())
-            //.background(linearStopGradient, in: Capsule())
-            .foregroundStyle(.white)
-            .padding(5)
-            
-            
+                }
+                .disabled(item.id < 0)
+                .padding()
+                .background(.red, in: Capsule())
+                //.background(linearStopGradient, in: Capsule())
+                .foregroundStyle(.white)
+                .padding(5)
+                
+                Button{
+                    if !path.isEmpty {
+                        path.removeLast()
+                    }
+                } label: {
+                    Image(systemName: "chevron.backward")
+                }
+                .padding()
+                    .background(.red, in: Capsule())
+                    .foregroundStyle(.white)
+                    .padding(5)
+                
+                Button{
+                    path = NavigationPath()
+                } label: {
+                    Image(systemName: "chevron.backward.2")
+                }
+                .padding()
+                .background(.red, in: Capsule())
+                .foregroundStyle(.white)
+                .padding(5)
+            }
         }
         //        .background (
         //            .angularGradient(
