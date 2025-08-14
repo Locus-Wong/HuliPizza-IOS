@@ -32,6 +32,7 @@ struct MenuItemView: View {
     @State private var suggestedItem: MenuItem = MenuModel().menu.randomElement() ?? noMenuItem
     @Binding var item : MenuItem
     @ObservedObject var orders : OrderModel
+    @Binding var path: NavigationPath
     var body: some View {
         VStack {
             HStack{
@@ -88,7 +89,7 @@ struct MenuItemView: View {
                 .background(.regularMaterial)
             }
             .navigationDestination(for: MenuItem.self) { _ in
-                MenuItemView(item: $suggestedItem, orders: orders)
+                MenuItemView(item: $suggestedItem, orders: orders, path: $path)
             }
             Button{
                 orderItem.item = item // pass the item which is our pizza into the order itself
@@ -135,5 +136,9 @@ struct MenuItemView: View {
 }
 
 #Preview {
-    MenuItemView(item: .constant(testMenuItem), orders: OrderModel())
+    MenuItemView(
+        item: .constant(testMenuItem),
+        orders: OrderModel(),
+        path: .constant(NavigationPath())
+    )
 }

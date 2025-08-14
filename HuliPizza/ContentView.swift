@@ -16,6 +16,7 @@ struct ContentView: View {
     @State private var showOrders: Bool = false
     @State private var selectedItem : MenuItem = noMenuItem
     @State private var presentGrid: Bool = false
+    @State private var path: NavigationPath = NavigationPath()
     var body: some View {
         VStack {
             HeaderView()
@@ -25,13 +26,13 @@ struct ContentView: View {
             StatusBarView(presentGrid: $presentGrid, showOrders: $showOrders)
             TabView {
                 Tab("Menu", systemImage: "menucard"){
-                    NavigationStack{
+                    NavigationStack(path: $path){
                         
                            
                         if presentGrid {
                             MenuGridView(menu: menu, selectedItem: $selectedItem)
                         } else{
-                            MenuView(menu: menu, selectedItem: $selectedItem)
+                            MenuView(menu: menu, selectedItem: $selectedItem, path: $path)
                         }
                     }
                 }

@@ -26,6 +26,7 @@ struct MenuView: View {
     var menu: [MenuItem]
     @Binding var selectedItem : MenuItem
     @EnvironmentObject var orders: OrderModel
+    @Binding var path: NavigationPath
     var body: some View {
         List(MenuCategory.allCases, id: \.self){ category in // The outer loop goes through each MenuCategory
             Section {
@@ -42,12 +43,16 @@ struct MenuView: View {
             }
         }.scrollContentBackground(.hidden)
             .navigationDestination(for: MenuItem.self) { selected in
-                MenuItemView(item: .constant(selected), orders: orders)
+                MenuItemView(item: .constant(selected), orders: orders, path: $path)
             }
     }
 }
 
 #Preview {
-    MenuView(menu: MenuModel().menu, selectedItem: .constant(testMenuItem))
+    MenuView(
+        menu: MenuModel().menu,
+        selectedItem: .constant(testMenuItem),
+        path: .constant(NavigationPath())
+    )
         .environmentObject(OrderModel())
 }
