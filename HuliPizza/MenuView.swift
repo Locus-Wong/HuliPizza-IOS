@@ -25,25 +25,29 @@ let meshGradient: MeshGradient = MeshGradient(
 struct MenuView: View {
     var menu: [MenuItem]
     @Binding var selectedItem : MenuItem
+    @EnvironmentObject var orders: OrderModel
     var body: some View {
         List(MenuCategory.allCases, id: \.self){ category in // The outer loop goes through each MenuCategory
             Section {
                 // Long form: menu.filter({ menuItem in menuItem.category == category })
                 ForEach(menu.filter({$0.category == category})){ item in // For each category, it filters the menu array to get only items in that category
-                    MenuRowView(item: item)
-                        .background(meshGradient)
-                        .listRowBackground(Color.clear) // clear the list background
-                        .onTapGesture {
-                            selectedItem = item
-                        }
+                    NavigationLink(value: item){
+                        MenuRowView(item: item)
+                            .background(meshGradient)
+                            .listRowBackground(Color.clear) // clear the list background
+                    }
                 }
             } header: {
                 Text(category.rawValue)
             }
         }.scrollContentBackground(.hidden)
+            .navigationDestination(for: MenuItem.self) { selected in
+                MenuItemView(item: .constant(selected), orders: orders)
+            }
     }
 }
 
 #Preview {
     MenuView(menu: MenuModel().menu, selectedItem: .constant(testMenuItem))
+        .environmentObject(OrderModel())
 }

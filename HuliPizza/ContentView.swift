@@ -26,11 +26,8 @@ struct ContentView: View {
             TabView {
                 Tab("Menu", systemImage: "menucard"){
                     NavigationStack{
-                        MenuItemView(item: $selectedItem, orders: orders)
-                            .padding(5)
-                            .background(.thinMaterial,
-                                        in: RoundedRectangle(cornerRadius: 10)
-                            )
+                        
+                           
                         if presentGrid {
                             MenuGridView(menu: menu, selectedItem: $selectedItem)
                         } else{
