@@ -186,6 +186,8 @@ struct OrderDetailView: View {
             self.name = orderItem.name
             self.comments = orderItem.comments
         }
+        .navigationTitle(orderItem.item.name)
+        .navigationBarTitleDisplayMode(.large)
         
     }
     

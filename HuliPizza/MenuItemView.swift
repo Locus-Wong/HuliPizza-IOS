@@ -153,6 +153,8 @@ struct MenuItemView: View {
         //                startAngle: Angle(degrees: 0),
         //                endAngle: Angle(degrees: 270))
         //        )
+        .navigationBarBackButtonHidden() // hide the back button
+        .toolbarVisibility(.hidden, for: .tabBar) // hide the tab toolbar on the bottom
         .background(radialGradient)
     }
 }
