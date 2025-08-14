@@ -40,20 +40,25 @@ struct MenuItemView: View {
                     .foregroundStyle(.ultraThickMaterial)
                     .padding(.leading)
                 
-                if let image = UIImage(named : "\(item.id)_lg"){
-                    Image(uiImage: image)
-                        .resizable()
-                        .scaledToFit()
-                        .padding([.top,.bottom], 5)
-                    //  .clipShape(RoundedRectangle(cornerRadius: 10))
-                        .cornerRadius(15)
-                    
-                } else {
-                    Image("surfboard_lg")
-                        .resizable()
-                        .scaledToFit()
-                        .rotationEffect(.degrees(180))
+                NavigationLink{
+                    ItemImageView(item: item)
+                } label: {
+                    if let image = UIImage(named : "\(item.id)_lg"){
+                        Image(uiImage: image)
+                            .resizable()
+                            .scaledToFit()
+                            .padding([.top,.bottom], 5)
+                        //  .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .cornerRadius(15)
+                        
+                    } else {
+                        Image("surfboard_lg")
+                            .resizable()
+                            .scaledToFit()
+                            .rotationEffect(.degrees(180))
+                    }
                 }
+               
             }.background(
                 .linearGradient(
                     colors: [Color("Surf"),
