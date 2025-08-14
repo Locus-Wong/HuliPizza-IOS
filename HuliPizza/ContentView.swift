@@ -27,8 +27,6 @@ struct ContentView: View {
             TabView {
                 Tab("Menu", systemImage: "menucard"){
                     NavigationStack(path: $path){
-                        
-                           
                         if presentGrid {
                             MenuGridView(menu: menu, selectedItem: $selectedItem)
                         } else{
@@ -37,8 +35,10 @@ struct ContentView: View {
                     }
                 }
                 Tab("Orders", systemImage: "cart"){
-                    OrderView(orders: orders)
-                        .cornerRadius(10)
+                    NavigationStack(path: $path){
+                        OrderView(orders: orders)
+                            .cornerRadius(10)
+                    }
                 }
                 .badge(orders.orderCount) // add the badge to the SF symbol
             }

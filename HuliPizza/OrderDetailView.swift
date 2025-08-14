@@ -147,6 +147,8 @@ struct OrderDetailView: View {
                     updateOrder()
                     if newOrder {
                         orders.addOrder(orderItem: orderItem)
+                    } else {
+                        orders.updateOrder(orderItem: orderItem)
                     }
                     presentSheet = false
                 }

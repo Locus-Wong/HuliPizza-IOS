@@ -46,14 +46,19 @@ struct OrderView: View {
                                 selected = order.wrappedValue // wrappedValue extracts the actual value from inside the binding wrapper. (need a copy of the value to work with)
                                 presentView = true
                             }
-                            .sheet(isPresented:$presentView){
-                                orders.updateOrder(orderItem:selected) // This is the completion handler, runs after the sheet is dismissed.
-                                // A completion handler is a function that gets called when an asynchronous operation finishes. It's a way to say "when this thing is done, do this other thing."
-                            } content:{
-                                OrderDetailView(orderItem: $selected, presentSheet: $presentView, newOrder: false)
-                            }
+                        
+//                            .sheet(isPresented:$presentView){
+//                                orders.updateOrder(orderItem:selected) // This is the completion handler, runs after the sheet is dismissed.
+//                                // A completion handler is a function that gets called when an asynchronous operation finishes. It's a way to say "when this thing is done, do this other thing."
+//                            } content:{
+//                                OrderDetailView(orderItem: $selected, presentSheet: $presentView, newOrder: false)
+//                            }
                     }
                 }
+                // no closure for completion handler, have to find anther way to update the order in OrderDetailView
+                .navigationDestination(isPresented: $presentView, destination: {
+                    OrderDetailView(orderItem: $selected, presentSheet: $presentView, newOrder: false)
+                })
                 .padding(.top, 70)
                 HStack {
                     Text("Order Pizza")
