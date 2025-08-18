@@ -27,6 +27,7 @@ struct ContentView: View {
                 HeaderView()
                     .shadow(radius: 5)
                     .environment(\.colorScheme, .light) // override the environment to light mode for this view
+                    .frame(maxHeight: 100)
             } else {
                 HStack{
                     Spacer()

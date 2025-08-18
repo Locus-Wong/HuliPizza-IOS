@@ -93,6 +93,31 @@ struct Surfboard: Shape{
     }
 }
 
+struct SurfboardBackground: ViewModifier{
+    func body(content: Content) -> some View {
+        content
+            .padding()
+            .foregroundStyle(.sky)
+            .background(.deep, in: Surfboard())
+    }
+}
+
+struct SurfboardTitle: ViewModifier{
+    @Environment(\.verticalSizeClass) private var verticalSizeClass
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    func body(content: Content) -> some View {
+        HStack{
+            Spacer()
+            content
+                .font(
+                    verticalSizeClass == .regular && horizontalSizeClass == .regular ? .largeTitle : .title
+                )
+        }
+    }
+}
+
+
+
 struct ListRowStyleModifier: ViewModifier{
     var imageID: Int
     
@@ -143,6 +168,14 @@ extension View {
     
     var statusBarStyle: some View {
         self.modifier(StatusBarStyle())
+    }
+    
+    var surfboardBackground: some View {
+        self.modifier(SurfboardBackground())
+    }
+    
+    var surfboardTitle: some View {
+        self.modifier(SurfboardTitle())
     }
     
     func appButtonStyleModifier(backgroundColor: Color) -> some View {
