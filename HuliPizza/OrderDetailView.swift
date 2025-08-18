@@ -79,10 +79,18 @@ struct OrderDetailView: View {
                 Text(orderItem.item.name)
                     .font(.title)
                     .fontWeight(.semibold)
-                    .foregroundColor(.primary)
+                    .foregroundColor(.sky)
                     .padding(.trailing)
             }
-            .background(.linearGradient(colors: [.surf,.sky], startPoint: .leading, endPoint: .trailing), in:Capsule())
+            //            .background(.linearGradient(colors: [.surf,.sky], startPoint: .leading, endPoint: .trailing), in:Capsule())
+            .background(
+                .linearGradient(
+                    colors: [.surf,.deep],
+                    startPoint: .leading,
+                    endPoint: .trailing
+                ),
+                in:Surfboard()
+            )
             // Quantitty, crust and price label--------
             HStack{
                 Text(quantity,format:.number)

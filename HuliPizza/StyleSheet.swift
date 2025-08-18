@@ -73,6 +73,26 @@ struct AppButtonStyleModifier: ViewModifier {
     }
 }
 
+struct Surfboard: Shape{
+    func path(in rect:CGRect) -> Path{
+        var radius: Double{rect.maxY - rect.midY}
+        var path = Path()
+        path.move(to: CGPoint(x: rect.minX, y: rect.minY))
+        path.addLine(to: CGPoint(x: rect.maxX - radius, y: rect.minY))
+        path
+            .addArc(
+                center: CGPoint(x: rect.maxX - radius, y: rect.midY),
+                radius: radius,
+                startAngle: .degrees(-90),
+                endAngle: .degrees(90),
+                clockwise: false
+            )
+        path.addLine(to: CGPoint(x: rect.minX, y:rect.maxY))
+         
+        return path
+    }
+}
+
 extension View {
     var appBackground: some View {
         self.modifier(AppBackground())

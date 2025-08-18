@@ -64,9 +64,9 @@ struct MenuItemView: View {
             }.background(
                 .linearGradient(
                     colors: [.surf,
-                             .sky.opacity(0.1)],
+                             .deep],
                     startPoint: .leading,
-                    endPoint: .trailing), in:Capsule()
+                    endPoint: .trailing), in:Surfboard().rotation(.degrees(180))
             ).shadow(color:.teal, radius:5, x:8, y: 8)
             
             
