@@ -17,12 +17,24 @@ struct ContentView: View {
     @State private var selectedItem : MenuItem = noMenuItem
     @State private var presentGrid: Bool = false
     @State private var path: NavigationPath = NavigationPath()
+    
+    @Environment(\.verticalSizeClass) private var verticalSizeClass
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    
     var body: some View {
         VStack {
-            HeaderView()
-                .shadow(radius: 5)
-                .environment(\.colorScheme, .light) // override the environment to light mode for this view
-            
+            if verticalSizeClass == .regular{
+                HeaderView()
+                    .shadow(radius: 5)
+                    .environment(\.colorScheme, .light) // override the environment to light mode for this view
+            } else {
+                HStack{
+                    Spacer()
+                    Text("Huli Pizza Company")
+                        .foregroundStyle(.white)
+                        .background(.deep)
+                }
+            }
             StatusBarView(presentGrid: $presentGrid, showOrders: $showOrders)
                 .statusBarStyle
             TabView {
