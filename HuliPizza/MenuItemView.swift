@@ -98,6 +98,7 @@ struct MenuItemView: View {
                 } label: {
                     Spacer()
                     Text(item.price, format: .currency(code: "USD")).bold()
+                        .font(path.count <= 1 ? .title : .title3)
                     Image(systemName: addedItem ? "cart.badge.plus.fill" : "cart.badge.plus")
                     Spacer()
                 }
@@ -123,30 +124,9 @@ struct MenuItemView: View {
 //                //.background(linearStopGradient, in: Capsule())
 //                .foregroundStyle(.white)
 //                .padding(5)
+                CustomBarView(path: $path)
                 
-                Button{
-                    if !path.isEmpty {
-                        path.removeLast()
-                    }
-                } label: {
-                    Image(systemName: "chevron.backward")
-                }
-                .appButtonStyleModifier(backgroundColor: .sky)
-//                .padding()
-//                .background(.red, in: Capsule())
-//                .foregroundStyle(.white)
-//                .padding(5)
-                
-                Button{
-                    path = NavigationPath()
-                } label: {
-                    Image(systemName: "chevron.backward.2")
-                }
-                .appButtonStyleModifier(backgroundColor: .sky)
-//                .padding()
-//                .background(.red, in: Capsule())
-//                .foregroundStyle(.white)
-//                .padding(5)
+
             }
         }
         //        .background (
