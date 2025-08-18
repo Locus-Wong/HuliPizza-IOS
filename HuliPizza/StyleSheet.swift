@@ -88,13 +88,17 @@ struct Surfboard: Shape{
                 clockwise: false
             )
         path.addLine(to: CGPoint(x: rect.minX, y:rect.maxY))
-         
+        
         return path
     }
 }
 
 struct ListRowStyleModifier: ViewModifier{
     var imageID: Int
+    
+    @Environment(\.verticalSizeClass) private var verticalSizeClass
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    
     func body(content: Content) -> some View {
         ZStack{
             Surfboard()
@@ -103,10 +107,25 @@ struct ListRowStyleModifier: ViewModifier{
             HStack{
                 if let image = UIImage(named: "\(imageID)_sm"){
                     Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(
+                            height: verticalSizeClass == .compact ? 40 : (
+                                horizontalSizeClass == .regular ? 125 : 70
+                            )
+                        )
                 } else {
                     Image("surfboard_sm")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(
+                            height: verticalSizeClass == .compact ? 40 : (
+                                horizontalSizeClass == .regular ? 125 : 70
+                            )
+                        )
                 }
                 content
+                    .font(verticalSizeClass == .regular && horizontalSizeClass == .regular ? .title : .body)
                     .padding([.top, .leading], 4)
                     .padding([.leading, .trailing], 12)
                     .background(.clear)
