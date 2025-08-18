@@ -93,6 +93,30 @@ struct Surfboard: Shape{
     }
 }
 
+struct ListRowStyleModifier: ViewModifier{
+    var imageID: Int
+    func body(content: Content) -> some View {
+        ZStack{
+            Surfboard()
+                .stroke(Color.surf)
+                .fill(Color.clear)
+            HStack{
+                if let image = UIImage(named: "\(imageID)_sm"){
+                    Image(uiImage: image)
+                } else {
+                    Image("surfboard_sm")
+                }
+                content
+                    .padding([.top, .leading], 4)
+                    .padding([.leading, .trailing], 12)
+                    .background(.clear)
+                    .foregroundStyle(.primary)
+            }
+        }
+    }
+}
+
+
 extension View {
     var appBackground: some View {
         self.modifier(AppBackground())
@@ -104,5 +128,9 @@ extension View {
     
     func appButtonStyleModifier(backgroundColor: Color) -> some View {
         self.modifier(AppButtonStyleModifier(backgroundColor: backgroundColor))
+    }
+    
+    func listRowStyleModifier(imageID: Int) -> some View {
+        self.modifier(ListRowStyleModifier(imageID: imageID))
     }
 }

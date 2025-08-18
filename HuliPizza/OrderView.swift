@@ -31,28 +31,29 @@ struct OrderView: View {
                     ForEach($orders.orderItems){ order in // $orders.orderItems: [Binding<OrderItem>]
                         //Text(order.item.name)
                         OrderRowView(order: order) // order: Binding<OrderItem>
-                            .padding(4)
+                            .listRowStyleModifier(imageID: order.item.id)
+                        //.padding(4)
                         //.background(.regularMaterial,in:RoundedRectangle(cornerRadius: 10))
-                            .background(cellBackground,in:RoundedRectangle(cornerRadius: 10))
-                            .shadow(radius: 10)
-                            .padding(.bottom, 5)
-                            .padding([.leading,.trailing],7)
+                        //.background(cellBackground,in:RoundedRectangle(cornerRadius: 10))
+                        //                            .shadow(radius: 10)
+                        //                            .padding(.bottom, 5)
+                        //                            .padding([.leading,.trailing],7)
                         //.animation(Spring(.bouncy, duration: 2), value: orders)
-//                            .onLongPressGesture{
-//                                orders.removeOrder(id: order.id)
-//                            }
+                        //                            .onLongPressGesture{
+                        //                                orders.removeOrder(id: order.id)
+                        //                            }
                             .animation(.bouncy(duration:2), value: orders.orderItems.count)
                             .onTapGesture{
                                 selected = order.wrappedValue // wrappedValue extracts the actual value from inside the binding wrapper. (need a copy of the value to work with)
                                 presentView = true
                             }
                         
-//                            .sheet(isPresented:$presentView){
-//                                orders.updateOrder(orderItem:selected) // This is the completion handler, runs after the sheet is dismissed.
-//                                // A completion handler is a function that gets called when an asynchronous operation finishes. It's a way to say "when this thing is done, do this other thing."
-//                            } content:{
-//                                OrderDetailView(orderItem: $selected, presentSheet: $presentView, newOrder: false)
-//                            }
+                        //                            .sheet(isPresented:$presentView){
+                        //                                orders.updateOrder(orderItem:selected) // This is the completion handler, runs after the sheet is dismissed.
+                        //                                // A completion handler is a function that gets called when an asynchronous operation finishes. It's a way to say "when this thing is done, do this other thing."
+                        //                            } content:{
+                        //                                OrderDetailView(orderItem: $selected, presentSheet: $presentView, newOrder: false)
+                        //                            }
                     }
                     .onDelete { offset in
                         orders.orderItems.remove(atOffsets: offset)

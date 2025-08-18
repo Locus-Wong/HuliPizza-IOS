@@ -11,11 +11,11 @@ struct MenuRowView: View {
     var item: MenuItem
     var body: some View {
         HStack (alignment: .top, spacing: 20){
-            if let image = UIImage(named: "\(item.id)_sm"){
-                Image(uiImage: image)
-            } else {
-                Image("surfboard_sm")
-            }
+//            if let image = UIImage(named: "\(item.id)_sm"){
+//                Image(uiImage: image)
+//            } else {
+//                Image("surfboard_sm")
+//            }
             VStack (alignment: .leading) {
                 HStack {
                     Text(item.name)

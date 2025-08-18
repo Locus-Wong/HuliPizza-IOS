@@ -34,7 +34,8 @@ struct MenuView: View {
                 ForEach(menu.filter({$0.category == category})){ item in // For each category, it filters the menu array to get only items in that category
                     NavigationLink(value: item){
                         MenuRowView(item: item)
-                            .background(meshGradient)
+                        // .background(meshGradient)
+                            .listRowStyleModifier(imageID: item.id)
                             .listRowBackground(Color.clear) // clear the list background
                     }
                 }
