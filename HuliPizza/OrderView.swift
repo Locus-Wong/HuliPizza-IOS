@@ -25,6 +25,7 @@ struct OrderView: View {
     @Bindable var orders: OrderModel
     @State private var presentView: Bool = false
     @State private var selected = noOrderItem
+    @State private var presentReceipt = false
     var body: some View {
         VStack {
             ZStack(alignment: .top){
@@ -81,6 +82,17 @@ struct OrderView: View {
             //            }.padding(5)
             //                .background(.regularMaterial, in : Capsule())
             //                .padding(7)
+            
+            Button("Receipt"){
+                presentReceipt = true
+            }
+            .surfboardTitle
+            .appButtonStyleModifier(backgroundColor: .palm)
+            .padding()
+            .sheet(isPresented: $presentReceipt) {
+                ReceiptView(orders: orders, presentView: $presentReceipt)
+            }
+            
             
         }.background(orderBackground)
     }
