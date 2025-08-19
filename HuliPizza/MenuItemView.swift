@@ -31,7 +31,8 @@ struct MenuItemView: View {
     @State private var orderItem: OrderItem = noOrderItem
     @State private var suggestedItem: MenuItem = MenuModel().menu.randomElement() ?? noMenuItem
     @Binding var item : MenuItem
-    @ObservedObject var orders : OrderModel
+    //@ObservedObject var orders : OrderModel
+    @Bindable var orders : OrderModel
     @Binding var path: NavigationPath
     
     @Environment(\.verticalSizeClass) private var verticalSizeClass

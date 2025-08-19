@@ -21,7 +21,8 @@ let cellBackground = RadialGradient(
 )
 
 struct OrderView: View {
-    @ObservedObject var orders: OrderModel
+    //@ObservedObject var orders: OrderModel
+    @Bindable var orders: OrderModel
     @State private var presentView: Bool = false
     @State private var selected = noOrderItem
     var body: some View {

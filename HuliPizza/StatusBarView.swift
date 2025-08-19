@@ -32,7 +32,8 @@ enum GridToggleAnimation: CaseIterable {
 }
 
 struct StatusBarView: View {
-    @EnvironmentObject var orders: OrderModel
+    //@EnvironmentObject var orders: OrderModel
+    @Environment(OrderModel.self) var orders
     @Binding var presentGrid: Bool
     @Binding var showOrders: Bool
     
@@ -124,5 +125,5 @@ struct StatusBarView: View {
 
 #Preview {
     StatusBarView(presentGrid: .constant(false), showOrders: .constant(false))
-        .environmentObject(OrderModel())
+        .environment(OrderModel())
 }

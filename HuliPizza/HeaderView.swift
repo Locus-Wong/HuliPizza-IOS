@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct HeaderView: View {
-    @EnvironmentObject var orders: OrderModel
+    //@EnvironmentObject var orders: OrderModel
+    @Environment(OrderModel.self) var orders: OrderModel
     @Environment(\.verticalSizeClass) var vSizeClass: UserInterfaceSizeClass? // optional
     var body: some View {
         VStack {
@@ -42,5 +43,5 @@ struct HeaderView: View {
 }
 
 #Preview {
-    HeaderView().environmentObject(OrderModel())
+    HeaderView().environment(OrderModel())
 }

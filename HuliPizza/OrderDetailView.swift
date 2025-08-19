@@ -30,7 +30,8 @@ struct OrderDetailView: View {
     
     
     //Environment Object
-    @EnvironmentObject var orders:OrderModel
+    //@EnvironmentObject var orders:OrderModel
+    @Environment(OrderModel.self) var orders: OrderModel
     
     /// Find the extended price of the order by mutplying the quantity by the stated price of the menu item.
     var extPrice:Double{
@@ -227,7 +228,7 @@ struct OrderDetailView_Previews: PreviewProvider {
     static var previews: some View {
         OrderDetailView(
             orderItem:  .constant(OrderItem(id: 0, item: testItem2)),
-            presentSheet: .constant(true)).environmentObject(OrderModel())
+            presentSheet: .constant(true)).environment(OrderModel())
     }
 }
 /// used instead of a `nil` for database reasons.

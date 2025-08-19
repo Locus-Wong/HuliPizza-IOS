@@ -12,7 +12,8 @@ let surf = Color.surf
 
 struct ContentView: View {
     var menu: [MenuItem]
-    @StateObject var orders: OrderModel = OrderModel()
+    //@StateObject var orders: OrderModel = OrderModel()
+    @State var orders: OrderModel = OrderModel()
     @State private var showOrders: Bool = false
     @State private var selectedItem : MenuItem = noMenuItem
     @State private var presentGrid: Bool = false
@@ -68,7 +69,7 @@ struct ContentView: View {
 //            )
 //        )
         .appBackground
-        .environmentObject(orders)
+        .environment(orders)
             .onAppear{
                 presentGrid = false
             }

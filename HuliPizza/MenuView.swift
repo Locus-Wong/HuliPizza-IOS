@@ -25,7 +25,8 @@ let meshGradient: MeshGradient = MeshGradient(
 struct MenuView: View {
     var menu: [MenuItem]
     @Binding var selectedItem : MenuItem
-    @EnvironmentObject var orders: OrderModel
+    //@EnvironmentObject var orders: OrderModel
+    @Environment(OrderModel.self) var orders: OrderModel
     @Binding var path: NavigationPath
     var body: some View {
         List(MenuCategory.allCases, id: \.self){ category in // The outer loop goes through each MenuCategory
@@ -56,5 +57,5 @@ struct MenuView: View {
         selectedItem: .constant(testMenuItem),
         path: .constant(NavigationPath())
     )
-    .environmentObject(OrderModel())
+    .environment(OrderModel())
 }
