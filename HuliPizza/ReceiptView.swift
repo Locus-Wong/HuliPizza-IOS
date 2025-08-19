@@ -20,11 +20,17 @@ struct ReceiptView: View {
             Grid{
                 GridRow{
                     Text("Item")
+                        .gridColumnAlignment(.leading)
+                        .gridCellAnchor(.center) // override the column alignment for one cell
                     Text("Price")
+                        .gridColumnAlignment(.trailing)
+                        .gridCellAnchor(.center)
                     Text("Quantity")
                     Text("Ext Price")
+                        .gridColumnAlignment(.trailing)
+                        .gridCellAnchor(.center)
                 }
-                
+                Divider() // a horizontal divider line
                 ForEach(orders.orderItems){ item in
                     GridRow{
                         Text(item.item.name)
@@ -33,13 +39,16 @@ struct ReceiptView: View {
                         Text(item.extPrice, format: .currency(code: "USD"))
                     }
                 }
-                
+                Divider()
                 GridRow{
                     Text("Total")
+                        .gridCellColumns(3)
+                        .gridCellAnchor(.trailing)
                     Text(orders.orderTotal, format:.currency(code: "USD"))
                 }
                 
             }
+            .background(.regularMaterial)
             Spacer()
             Button("OK"){
                 presentView = false
