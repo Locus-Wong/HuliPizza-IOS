@@ -105,12 +105,13 @@ struct OrderDetailView: View {
                 
             }
             .font(.headline)
-            .foregroundStyle(sky)
+            .foregroundStyle(.deep)
             .fontWeight(.bold)
             // Ask who this pizza is for
             TextField("Customer Name", text: $name)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
+                .foregroundStyle(.deep)
             // Pizza Attributes-------------------
             VStack{
                 // Crust picker-------------------

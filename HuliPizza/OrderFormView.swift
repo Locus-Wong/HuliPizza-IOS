@@ -91,7 +91,7 @@ struct OrderFormView: View {
                 ),
                 in:Surfboard()
             )
-            // Quantitty, crust and price label--------
+            // Quantity, crust and price label--------
             HStack{
                 Text(quantity,format:.number)
                 Text(pizzaCrust.rawValue + " Crust")
