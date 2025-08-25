@@ -89,5 +89,9 @@ struct MenuGridView: View {
 }
 
 #Preview {
-    MenuGridView(menu: MenuModel().menu, selectedItem: .constant(noMenuItem))
+    @Previewable @State var selectedItem = noMenuItem
+    VStack{
+        Text(selectedItem.name).surfboardTitle
+        MenuGridView(menu: MenuModel().menu, selectedItem: $selectedItem)
+    }
 }
